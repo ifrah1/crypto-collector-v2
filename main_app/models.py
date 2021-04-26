@@ -4,7 +4,19 @@ from django.db import models
 from django.urls import reverse
 
 # Create your models here.
+# feelings model
+class Feelings(models.Model):
+    status = models.CharField(max_length=20)
+    color = models.CharField(max_length=20)
 
+    # Other goodness such as 'def __str__():' below
+    def __str__(self):
+        return f'{self.status} {self.color}'
+
+    def get_absolute_url(self):
+        return reverse('feelings_detail', kwargs={'feelings_id': self.id}) 
+
+# crypto model
 class Crypto(models.Model):
     name = models.CharField(max_length=100)
     price = models.IntegerField()
