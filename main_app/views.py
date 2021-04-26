@@ -4,7 +4,7 @@ from django.shortcuts import render
 from .models import Crypto
 
 # class based views
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 # Create your views here.
 
@@ -32,3 +32,14 @@ class CryptoCreate(CreateView):
     #fields = '__all__'  # does all form
     fields = ['name', 'price', 'description', 'amount'] # what fields we want in form
     #success_url = '/cryptos/'
+
+# update a crypto view
+class CryptoUpdate(UpdateView):
+    model = Crypto
+    # Let's disallow the renaming of a crypto by excluding the name field!
+    fields = ['price', 'description', 'amount']
+
+# delete a crypto view
+class CryptoDelete(DeleteView):
+    model = Crypto
+    success_url = '/cryptos/'

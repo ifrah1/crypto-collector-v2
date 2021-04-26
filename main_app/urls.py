@@ -10,4 +10,8 @@ urlpatterns = [
 
     # route used to show a form and create a crypto
     path('cryptos/create/', views.CryptoCreate.as_view(), name='cryptos_create'), 
+    # update a crypto
+    path('cryptos/<int:pk>/update/', views.CryptoUpdate.as_view(), name='cryptos_update'),
+    # delete a crypto
+    path('cryptos/<int:pk>/delete/', views.CryptoDelete.as_view(), name='cryptos_delete'),
 ]

@@ -14,6 +14,10 @@
         <p>Amount: 0</p>
         {% endif %}
     </div>
+    <div class="card-action">
+        <a href="{% url 'cryptos_update' crypto.id %}">Edit</a>
+        <a href="{% url 'cryptos_delete' crypto.id %}">Delete</a>
+    </div>
 </div>
 
 {% endblock %}
