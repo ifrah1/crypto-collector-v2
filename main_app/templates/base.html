@@ -21,8 +21,9 @@
                     <li><a href="/" class="left brand-logo">&nbsp;&nbsp;CryptoCollector</a></li>
                 </ul>
                 <ul class="right">
-                    <li><a href="/about">About</a></li>
-                    <li><a href="/cryptos">View All My Cryptos</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'cryptos_create' %}">Add a Crypto</a></li>
+                    <li><a href="{% url 'index' %}">View All My Cryptos</a></li>
                 </ul>
             </div>
         </nav>
