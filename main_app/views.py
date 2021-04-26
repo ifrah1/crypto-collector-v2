@@ -17,3 +17,8 @@ def about(request):
 def cryptos_index(request):
     cryptos = Crypto.objects.all()
     return render(request, 'cryptos/index.html', { 'cryptos': cryptos })
+
+# individual crypto detail page
+def cryptos_detail(request, crypto_id):
+    crypto = Crypto.objects.get(id=crypto_id)
+    return render(request, 'cryptos/detail.html',{'crypto': crypto})
