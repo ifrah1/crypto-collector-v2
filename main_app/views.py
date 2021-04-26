@@ -3,6 +3,8 @@ from django.shortcuts import render
 # Add the following import
 from django.http import HttpResponse
 
+from django.shortcuts import render
+
 # Create your views here.
 
 # Define the home view
@@ -11,4 +13,4 @@ def home(request):
 
 
 def about(request):
-    return HttpResponse('<h1>About the CryptoCollector</h1>')
+    return render(request, 'about.html')
