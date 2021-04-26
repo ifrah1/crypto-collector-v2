@@ -77,11 +77,12 @@ def feeling_detail(request, feeling_id):
 # create a new crypto view
 class FeelingsCreate(CreateView):
     model = Feelings
-    #fields = '__all__'  # does all form
     fields = ['status', 'color']
 
-# update a feelings view
-# class FeelingsUpdate(UpdateView):
-#     model = Feelings
-#     # Let's disallow the renaming of a crypto by excluding the name field!
-#     fields = ['status', 'color']
+class FeelingsUpdate(UpdateView):
+    model = Feelings
+    fields = ['status', 'color']
+
+class FeelingsDelete(DeleteView):
+    model = Feelings
+    success_url = '/feelings/'

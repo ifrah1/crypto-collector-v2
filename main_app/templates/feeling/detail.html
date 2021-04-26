@@ -9,6 +9,11 @@
         <p>Status: {{ feeling.status }}</p>
         <p>Color: {{ feeling.color }}</p>
     </div>
+
+    <div class="card-action">
+        <a href="{% url 'feelings_update' feeling.id %}">Edit</a>
+        <a href="{% url 'feelings_delete' feeling.id %}">Delete</a>
+    </div>
 </div>
 
 {% endblock %}
