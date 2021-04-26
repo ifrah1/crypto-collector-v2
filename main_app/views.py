@@ -1,19 +1,8 @@
 from django.shortcuts import render
 
-from django.shortcuts import render
+# import models
+from .models import Crypto
 
-
-class Crypto:  # Note that parens are optional if not inheriting from another class
-    def __init__(self, name, price, description, amount):
-        self.name = name
-        self.price = price
-        self.description = description
-        self.amount = amount
-
-cryptos = [
-    Crypto('litecoin', 300, 'fast coin', 3),
-    Crypto('bitcoin', 50000, 'OG', 0),
-]
 # Create your views here.
 
 # Define the home view
@@ -26,4 +15,5 @@ def about(request):
 
 # Add new view
 def cryptos_index(request):
+    cryptos = Crypto.objects.all()
     return render(request, 'cryptos/index.html', { 'cryptos': cryptos })
