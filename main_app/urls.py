@@ -19,9 +19,9 @@ urlpatterns = [
 
 
     # feelings urls
-    # path('feelings/', views.feelings_index, name='all_feelings'),
-    # path('feelings/<int:feeling_id>/', views.feeling_detail, name='feeling_detail'),
-    # path('feelings/create/', views.Create_feeling.as_view(), name='create_feeling'),
-    # path('feelings/<int:pk>/update/', views.Update_feeling.as_view(), name='update_feeling'),
+    path('feelings/', views.feelings_index, name='feelings_all'),
+    path('feelings/<int:feeling_id>/', views.feeling_detail, name='feeling_detail'),
+    path('feelings/create/', views.FeelingsCreate.as_view(), name='feelings_create'),
+    # path('feelings/<int:pk>/update/', views.FeelingsUpdate.as_view(), name='update_feeling'),
     # path('feelings/<int:pk>/delete/', views.Delete_feeling.as_view(), name='delete_feeling'),
 ]

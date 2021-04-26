@@ -12,9 +12,9 @@ class Feelings(models.Model):
     # Other goodness such as 'def __str__():' below
     def __str__(self):
         return f'{self.status} {self.color}'
-
+    # fixed redirection issue once 
     def get_absolute_url(self):
-        return reverse('feelings_detail', kwargs={'feelings_id': self.id}) 
+        return reverse('feeling_detail', kwargs={'feeling_id': self.id}) 
 
 # crypto model
 class Crypto(models.Model):

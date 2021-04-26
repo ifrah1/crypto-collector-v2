@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 # import models
-from .models import Crypto
+from .models import Crypto, Feelings
 
 # class based views
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -61,3 +61,27 @@ class CryptoUpdate(UpdateView):
 class CryptoDelete(DeleteView):
     model = Crypto
     success_url = '/cryptos/'
+
+
+# feelings views -*-*-*-*-*-*-*-
+# Add new view
+def feelings_index(request):
+    feelings = Feelings.objects.all()
+    return render(request, 'feeling/index.html', { 'feelings': feelings })
+
+# individual crypto detail page
+def feeling_detail(request, feeling_id):
+    feeling = Feelings.objects.get(id=feeling_id)
+    return render(request, 'feeling/detail.html',{'feeling': feeling})
+
+# create a new crypto view
+class FeelingsCreate(CreateView):
+    model = Feelings
+    #fields = '__all__'  # does all form
+    fields = ['status', 'color']
+
+# update a feelings view
+# class FeelingsUpdate(UpdateView):
+#     model = Feelings
+#     # Let's disallow the renaming of a crypto by excluding the name field!
+#     fields = ['status', 'color']
