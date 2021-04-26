@@ -3,20 +3,45 @@
 
 <h1>Crypto Details</h1>
 
-<div class="card">
-    <div class="card-content">
-        <span class="card-title">{{ crypto.name }}</span>
-        <p>Price: {{ crypto.price }}</p>
-        <p>Description: {{ crypto.description }}</p>
-        {% if crypto.amount > 0 %}
-        <p>Amount: {{ crypto.amount }}</p>
-        {% else %}
-        <p>Amount: 0</p>
-        {% endif %}
+<div class="row">
+    <div class="col s6">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{ crypto.name }}</span>
+                <p>Price: {{ crypto.price }}</p>
+                <p>Description: {{ crypto.description }}</p>
+                {% if crypto.amount > 0 %}
+                <p>Amount: {{ crypto.amount }}</p>
+                {% else %}
+                <p>Amount: 0</p>
+                {% endif %}
+            </div>
+            <div class="card-action">
+                <a href="{% url 'cryptos_update' crypto.id %}">Edit</a>
+                <a href="{% url 'cryptos_delete' crypto.id %}">Delete</a>
+            </div>
+        </div>
     </div>
-    <div class="card-action">
-        <a href="{% url 'cryptos_update' crypto.id %}">Edit</a>
-        <a href="{% url 'cryptos_delete' crypto.id %}">Delete</a>
+    <div class="col s6">
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Purchase Price</th>
+                    <th>Total Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for purchase in crypto.purchase_set.all %}
+                <tr>
+                    <td>{{purchase.date}}</td>
+                    <td>{{purchase.purchase_price}}</td>
+                    <td>{{purchase.total_amount}}</td>
+                    <td>{{purchase.get_purchase_display}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 
