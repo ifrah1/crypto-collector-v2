@@ -14,4 +14,6 @@ urlpatterns = [
     path('cryptos/<int:pk>/update/', views.CryptoUpdate.as_view(), name='cryptos_update'),
     # delete a crypto
     path('cryptos/<int:pk>/delete/', views.CryptoDelete.as_view(), name='cryptos_delete'),
+    # add purchases for a crypto
+    path('cryptos/<int:crypto_id>/add_purchase/', views.add_purchase, name='add_purchase'), 
 ]

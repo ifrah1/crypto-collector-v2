@@ -1,10 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # import models
 from .models import Crypto
 
 # class based views
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
+# import purchase form
+from .forms import PurchaseForm
 
 # Create your views here.
 
@@ -24,7 +27,22 @@ def cryptos_index(request):
 # individual crypto detail page
 def cryptos_detail(request, crypto_id):
     crypto = Crypto.objects.get(id=crypto_id)
-    return render(request, 'cryptos/detail.html',{'crypto': crypto})
+    # instantiate PurchaseForm to be rendered in the template
+    purchase_form = PurchaseForm()
+    return render(request, 'cryptos/detail.html',{'crypto': crypto, 'purchase_form': purchase_form})
+
+# adds purchase to crypto
+def add_purchase(request, crypto_id):
+    # create the ModelForm using the data in request.POST
+    form = PurchaseForm(request.POST)
+    # validate the form
+    if form.is_valid():
+        # don't save the form to the db until it
+        # has the crypto_id assigned
+        new_purchase = form.save(commit=False)
+        new_purchase.crypto_id = crypto_id
+        new_purchase.save()
+    return redirect('detail', crypto_id=crypto_id)
 
 # create a new crypto view
 class CryptoCreate(CreateView):

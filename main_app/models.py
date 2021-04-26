@@ -29,3 +29,7 @@ class Purchase(models.Model):
 
     def __str__(self):
         return f"Bought {self.total_amount} on {self.date}"
+
+    # change order of purchase 
+    class Meta:
+        ordering = ['-date']
