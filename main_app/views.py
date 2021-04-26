@@ -1,8 +1,5 @@
 from django.shortcuts import render
 
-# Add the following import
-from django.http import HttpResponse
-
 from django.shortcuts import render
 
 
@@ -21,7 +18,7 @@ cryptos = [
 
 # Define the home view
 def home(request):
-    return HttpResponse('<h1>Hello /ᐠ｡‸｡ᐟ\ﾉ</h1>')
+    return render(request, 'home.html')
 
 
 def about(request):
