@@ -17,6 +17,11 @@ urlpatterns = [
     # add purchases for a crypto
     path('cryptos/<int:crypto_id>/add_purchase/', views.add_purchase, name='add_purchase'), 
 
+    # associate a feeling with a crypto (M:M)
+    path('cryptos/<int:crypto_id>/assoc_feeling/<int:feeling_id>/', views.assoc_feeling, name='assoc_feeling'), 
+
+    # remove a feelings with a crypto (M:M)
+    path('cryptos/<int:crypto_id>/remove_feeling/<int:feeling_id>/', views.remove_feeling, name='remove_feeling'),
 
     # feelings urls
     path('feelings/', views.feelings_index, name='feelings_all'),
