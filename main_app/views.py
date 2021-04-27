@@ -63,6 +63,14 @@ class CryptoCreate(CreateView):
     #fields = '__all__'  # does all form
     fields = ['name', 'price', 'description', 'amount'] # what fields we want in form
     #success_url = '/cryptos/'
+    
+    # This inherited method is called when a
+    # valid crypto form is being submitted
+    def form_valid(self, form):
+        # Assign the logged in user (self.request.user)
+        form.instance.user = self.request.user  # form.instance is the crypto
+        # Let the CreateView do its job as usual
+        return super().form_valid(form)
 
 # update a crypto view
 class CryptoUpdate(UpdateView):
