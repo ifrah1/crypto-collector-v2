@@ -50,6 +50,54 @@
     </div>
 </div>
 
+<hr>
+<div class="row">
+    <div class="col s6">
+        <h3>Your {{ crypto.name }} Feelings</h3>
+        {% if crypto.feelings.count %}
+        {% for feeling in crypto.feelings.all %}
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">
+                    <span style="color: {{ feeling.color }}">{{ feeling.status }}</span>
+                </span>
+            </div>
+            <div class="card-action">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn red">Remove</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h5>No feelings :(</h5>{% endif %}
+    </div>
+    <!-- Available feelings will come after this line -->
+    <div class="col s6">
+        <h3>Available Feelings for {{crypto.name}} </h3>
+        {% if feelings.count %}
+        {% for feeling in feelings.all %}
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">
+                    <span style="color: {{ feeling.color }}">{{ feeling.status }}</span>
+                </span>
+            </div>
+            <div class="card-action">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Add</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h5>{{crypto.name}} Already Has All feelings Available</h5>
+        {% endif %}
+    </div>
+</div>
+
 <script>
     var dateEl = document.getElementById('id_date');
     M.Datepicker.init(dateEl, {

@@ -27,9 +27,14 @@ def cryptos_index(request):
 # individual crypto detail page
 def cryptos_detail(request, crypto_id):
     crypto = Crypto.objects.get(id=crypto_id)
+    
+    # Get the feelings for crypto doesn't have
+    feelings_crypto_doesnt_have = Feelings.objects.exclude(id__in = crypto.feelings.all().values_list('id'))
+
     # instantiate PurchaseForm to be rendered in the template
     purchase_form = PurchaseForm()
-    return render(request, 'cryptos/detail.html',{'crypto': crypto, 'purchase_form': purchase_form})
+
+    return render(request, 'cryptos/detail.html',{'crypto': crypto, 'purchase_form': purchase_form, 'feelings': feelings_crypto_doesnt_have})
 
 # adds purchase to crypto
 def add_purchase(request, crypto_id):
