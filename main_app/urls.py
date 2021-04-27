@@ -32,4 +32,7 @@ urlpatterns = [
     path('feelings/create/', views.FeelingsCreate.as_view(), name='feelings_create'),
     path('feelings/<int:pk>/update/', views.FeelingsUpdate.as_view(), name='feelings_update'),
     path('feelings/<int:pk>/delete/', views.FeelingsDelete.as_view(), name='feelings_delete'),
+
+    # user account paths:
+    path('accounts/signup/', views.signup, name='signup'),
 ]
