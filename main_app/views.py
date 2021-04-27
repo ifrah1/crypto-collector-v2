@@ -1,13 +1,21 @@
 from django.shortcuts import render, redirect
 
 # import models
-from .models import Crypto, Feelings
+from .models import Crypto, Feelings, Photo
 
 # class based views
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 # import purchase form
 from .forms import PurchaseForm
+
+# aws sdk for uploading to s3
+import boto3
+import uuid
+
+# variables needed for s4 buckets
+S3_BASE_URL = 'https://s3.us-east-1.amazonaws.com/'
+BUCKET = 'crypto-collector'
 
 # Create your views here.
 
@@ -102,4 +110,25 @@ def assoc_feeling(request, crypto_id, feeling_id):
 def remove_feeling(request, crypto_id, feeling_id):
     # Note that you can pass a feeling's id instead of the whole object
     Crypto.objects.get(id=crypto_id).feelings.remove(feeling_id)
+    return redirect('detail', crypto_id=crypto_id)
+
+
+# adds a photo 
+def add_photo(request, crypto_id):
+    # photo-file will be the "name" attribute on the <input type="file">
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        # need a unique "key" for S3 / needs image file extension too
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        # just in case something goes wrong
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            # build the full url string
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            # we can assign to crypto_id or crypto (if you have a crypto object)
+            photo = Photo(url=url, crypto_id=crypto_id)
+            photo.save()
+        except:
+            print('An error occurred uploading file to S3')
     return redirect('detail', crypto_id=crypto_id)
