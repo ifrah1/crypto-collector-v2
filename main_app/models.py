@@ -48,3 +48,11 @@ class Purchase(models.Model):
     # change order of purchase 
     class Meta:
         ordering = ['-date']
+
+# photo model
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    crypto = models.ForeignKey(Crypto, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Photo for crypto_id: {self.crypto_id} @{self.url}"
