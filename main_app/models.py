@@ -3,6 +3,9 @@ from django.db import models
 # Import the reverse function
 from django.urls import reverse
 
+# Import the User
+from django.contrib.auth.models import User
+
 # Create your models here.
 # feelings model
 class Feelings(models.Model):
@@ -25,6 +28,9 @@ class Crypto(models.Model):
 
     # Add the M:M relationship
     feelings = models.ManyToManyField(Feelings)
+
+    # Add the foreign key linking to a user instance
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
