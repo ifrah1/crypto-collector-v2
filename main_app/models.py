@@ -23,6 +23,9 @@ class Crypto(models.Model):
     description = models.TextField(max_length=250)
     amount = models.IntegerField()
 
+    # Add the M:M relationship
+    feelings = models.ManyToManyField(Feelings)
+
     def __str__(self):
         return self.name
 
