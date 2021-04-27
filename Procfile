@@ -1,1 +1,1 @@
-web: gunicorn crypto_collector_project.wsgi
+web: gunicorn cryptocollector_project.wsgi
